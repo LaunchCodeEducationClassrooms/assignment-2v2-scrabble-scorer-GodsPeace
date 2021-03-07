@@ -24,6 +24,9 @@ function initialPrompt() {
    
 };
 
+
+
+
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
 	let letterPoints = "";
@@ -66,22 +69,25 @@ let  vowelBonusScore=(word)=> {
   return finalScore;
 
 };
-word=input.question("Let's play some scrabble!\nEnter a word to score: ");
+
+
+//word=input.question("Let's play some scrabble!\nEnter a word to score: ");
+  
   let scoringMethod0={
     name:"Simple Score",
     description: "Each letter is worth 1 point",	
-    scorerFunction: simpleScore(word)
+    scorerFunction: simpleScore
 
   };
   let scoringMethod1={
     name:"Bonus Vowels",
     description:"Vowels are 3 pts",
-    scoreFunction:vowelBonusScore(word) 
+    scoreFunction:vowelBonusScore 
   };
   let scoringMethod2={ 
     name:"Scrabble",
     description:"Uses the oldScrabbleScorer() function to determine the score for a given word",
-    scoreFunction: oldScrabbleScorer(word) }  
+    scoreFunction: oldScrabbleScorer }  
 
 const scoringAlgorithms = [scoringMethod0,scoringMethod1,scoringMethod2];
 
@@ -92,7 +98,8 @@ let scrabbleScore;
 
 
 function scorerPrompt(){
-let algorithmChoice=input.question("What scoring algorithm would you like to use?: ");
+let algorithmChoice=input.question(`What scoring algorithm would you like to use?:\n1.${scoringAlgorithms[0].name}\n2.${scoringAlgorithms[1].name}\n3.${scoringAlgorithms[2].name}\nEnter your choice: `);
+  
    return algorithmChoice;
 
 
@@ -103,8 +110,16 @@ let newPointStructure;
 
 function runProgram() {
   let word=initialPrompt();
-   console.log (word);
-   
+  let algorithmChoice = scorerPrompt();
+ 
+
+if (algorithmChoice===1); {
+
+    console.log("A");
+
+    if (algorithmChoice === 2); 
+            console.log("B");
+    }
 };
 
 // Don't write any code below this line //
