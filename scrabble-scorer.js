@@ -13,7 +13,7 @@ const oldPointStructure = {
 };
 
 
-//const simplePointStructure = 1:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -55,7 +55,7 @@ let  vowelBonusScore=(word)=> {
   let vowels = ["a", "e", "i", "o", "u"];
   let pointsForVowel = 3;
   let pointsForConsonant = 1;
-  let finalScore = 0;
+  let finalscore= 0;
 
   wordArray.forEach(letter => {
     if (vowels.includes(letter)) {
@@ -98,30 +98,48 @@ let scrabbleScore;
 
 
 function scorerPrompt(){
-let algorithmChoice=input.question(`What scoring algorithm would you like to use?:\n1.${scoringAlgorithms[0].name}\n2.${scoringAlgorithms[1].name}\n3.${scoringAlgorithms[2].name}\nEnter your choice: `);
+let algorithmChoice=input.question(`What scoring algorithm would you like to use?:\n0-${scoringAlgorithms[0].name}\n1-${scoringAlgorithms[1].name}\n2-${scoringAlgorithms[2].name}\nEnter your choice: `);
   
    return algorithmChoice;
 
 
 };
-function transform() {};
+//function transform() {};
 
-let newPointStructure;
+//function transform(oldPointStructure){
+ function transform(oldPointStructure){
+  let newLettersAsKeysObject = {};
+  for (const [letterValue, letterArr] of Object.entries(oldPointStructure)) {
+    for (const letter of letterArr) {
+      newLettersAsKeysObject[letter.toLowerCase()] = letterValue;
+    }
+  }
+  return newLettersAsKeysObject;
+}
+{
+console.log(transform(oldPointStructure)); 
+}
+
+//console.log (Object.entries(newPoints))
+
+let newPointStructure=transform(oldPointStructure);
 
 function runProgram() {
   let word=initialPrompt();
   let algorithmChoice = scorerPrompt();
  
 
-if (algorithmChoice===1); {
+if (algorithmChoice==0) {
 
-    console.log("A");
-
-    if (algorithmChoice === 2); 
-            console.log("B");
-    }
-};
-
+    console.log(`You have chosen Simple Score\nYour score is: ${simpleScore(word)} `)
+}
+if (algorithmChoice == 1){
+            console.log (`You have chosen Bonus Vowels\nYour score is: ${vowelBonusScore(word)} `)
+}
+if (algorithmChoice == 2){
+            console.log (`You have chosen Scrabble\nYour score is: ${oldScrabbleScorer(word)} `)
+}
+}
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {
