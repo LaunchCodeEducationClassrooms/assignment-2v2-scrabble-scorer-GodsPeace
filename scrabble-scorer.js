@@ -29,13 +29,13 @@ function initialPrompt() {
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
-	let letterPoints = "";
+	let newletterPoints = "";
 
 	for (let i = 0; i < word.length; i++) {
 
 	  for (const pointValue in oldPointStructure) {
 
-		 if (oldPointStructure[pointValue].includes(word[i])) {
+		 if (newPointStructure[key].includes(word[i])) {
 			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
 		 }
 
@@ -55,18 +55,18 @@ let  vowelBonusScore=(word)=> {
   let vowels = ["a", "e", "i", "o", "u"];
   let pointsForVowel = 3;
   let pointsForConsonant = 1;
-  let finalscore= 0;
+  let finalVowelBonusPoints = 0;
 
   wordArray.forEach(letter => {
     if (vowels.includes(letter)) {
-      finalScore += pointsForVowel;
+      finalVowelBonusPoints += pointsForVowel;
     } else {
-      finalScore += pointsForConsonant;
+      finalVowelBonusPoints += pointsForConsonant;
     }
 
   });
 
-  return finalScore;
+  return finalVowelBonusPoints;
 
 };
 
@@ -93,10 +93,16 @@ const scoringAlgorithms = [scoringMethod0,scoringMethod1,scoringMethod2];
 
 
 
-let scrabbleScore;
+let scrabbleScore;//=(word)=> {
+//word = word.toLowerCase();
+//for (let i = 0; i < word.length; i++) {
+//for (const pointValue in oldPointStructure) {
 
 
 
+
+
+  
 function scorerPrompt(){
 let algorithmChoice=input.question(`What scoring algorithm would you like to use?:\n0-${scoringAlgorithms[0].name}\n1-${scoringAlgorithms[1].name}\n2-${scoringAlgorithms[2].name}\nEnter your choice: `);
   
@@ -120,7 +126,7 @@ let algorithmChoice=input.question(`What scoring algorithm would you like to use
 console.log(transform(oldPointStructure)); 
 }
 
-//console.log (Object.entries(newPoints))
+//oldScrabbleScorer() uses oldPointStructure and returns a score for each letter in a word. You'll want to write scrabbleScore() to use newPointStructure and return a cumulative score for the whole word entered.
 
 let newPointStructure=transform(oldPointStructure);
 
