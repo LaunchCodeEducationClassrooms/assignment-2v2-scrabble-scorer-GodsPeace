@@ -12,21 +12,13 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-
-
-
-// your job is to finish writing these functions and variables that we've named //
-// don't change the names or your program won't work as expected. //
 //greet player and prompt for word//
 function initialPrompt() {
-   let word=input.question("Let's play some scrabble!\nEnter a word to score: ");
+   let word=input.question("Let's play some scrabble!\n\nEnter a word to score: ");
    return word;
    
 };
-
-
-
-
+//inefficiently iterate over each key in oldPointStructure and then checks if the letter is inside the array paired with that key
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
 	let letterPoints = "";
@@ -43,7 +35,7 @@ function oldScrabbleScorer(word) {
 	}
 	return letterPoints;
  };
-
+//
 let simpleScore=(word)=> {
   word = word.toUpperCase();
   return word.length;
@@ -51,8 +43,8 @@ let simpleScore=(word)=> {
 
 let  vowelBonusScore=(word)=> {
 
-  let wordArray = word.toLowerCase().split("");
-  let vowels = ["a", "e", "i", "o", "u"];
+  let wordArray = word.toUpperCase().split("");
+  let vowels = ["A", "E", "I", "O", "U"];
   let pointsForVowel = 3;
   let pointsForConsonant = 1;
   let finalVowelBonusPoints = 0;
@@ -65,25 +57,22 @@ let  vowelBonusScore=(word)=> {
     }
 
   });
-
   return finalVowelBonusPoints;
 
 };
-let newPointStructure=transform(oldPointStructure);
+let newPointStructure=transform(oldPointStructure); 
 
 
-
-let scrabbleScore=(word)=>{
+let scrabbleScore=(word)=> {
+word = word.toLowerCase();
 let totalLetterPoints = 0;
-for (i in word ){
+
 for (i = 0; i < word.length; i++) {
     letter = word[i];
     totalLetterPoints += newPointStructure[letter];
 }
 return(totalLetterPoints);
 }
-}
-word=input.question("Let's play some scrabble!\nEnter a word to score: ");
   
   let scoringMethod0={
     name:"Simple Score",
@@ -99,27 +88,18 @@ word=input.question("Let's play some scrabble!\nEnter a word to score: ");
   let scoringMethod2={ 
     name:"Scrabble",
     description:"Uses the scrabbleScore() function to determine the score for a given word",
-    scoreFunction: scrabbleScore() }  
+    scoreFunction: scrabbleScore }  
 
 const scoringAlgorithms = [scoringMethod0,scoringMethod1,scoringMethod2];
 
 
-
-
-
-
-
   
 function scorerPrompt(){
-let algorithmChoice=input.question(`What scoring algorithm would you like to use?:\n0-${scoringAlgorithms[0].name}\n1-${scoringAlgorithms[1].name}\n2-${scoringAlgorithms[2].name}\nEnter your choice: `);
+let algorithmChoice=input.question(`\nWhat scoring algorithm would you like to use?:\n\n0-${scoringAlgorithms[0].name}-1 point for each letter\n\n1-${scoringAlgorithms[1].name}-Vowels are worth 3 points\n\n2-${scoringAlgorithms[2].name}-Uses standard Scrabble scoring system\n\nEnter 0, 1, or 2: `);
   
    return algorithmChoice;
+}
 
-
-};
-//function transform() {};
-
-//function transform(oldPointStructure){
  function transform(oldPointStructure){
   let newLettersAsKeysObject = {};
   for (const [letterValue, letterArr] of Object.entries(oldPointStructure)) {
@@ -129,17 +109,6 @@ let algorithmChoice=input.question(`What scoring algorithm would you like to use
   }
   return newLettersAsKeysObject;
 }
-{
-console.log(transform(oldPointStructure)); 
-}
-
-//oldScrabbleScorer() uses oldPointStructure and returns a score for each letter in a word. You'll want to write scrabbleScore() to use newPointStructure and return a cumulative score for the whole word entered.
-
-
-
-
-
-
 
 
 
@@ -152,13 +121,13 @@ function runProgram() {
 
 if (algorithmChoice==0) {
 
-    console.log(`You have chosen Simple Score\nYour score is: ${simpleScore(word)} `)
+    console.log(`You have chosen Simple Score\nThe score for the word ${word} is ${simpleScore(word)} `)
 }
 if (algorithmChoice == 1){
-            console.log (`You have chosen Bonus Vowels\nYour score is: ${vowelBonusScore(word)} `)
+            console.log (`You have chosen Bonus Vowels\nThe score for the word ${word} is ${vowelBonusScore(word)}. `)
 }
 if (algorithmChoice == 2){
-            console.log (`You have chosen Scrabble\nYour score is:\n${scrabbleScore(word)} `)
+            console.log (`You have chosen Scrabble\nThe score for the word ${word} is ${scrabbleScore(word)} `)
 }
 }
 // Don't write any code below this line //
