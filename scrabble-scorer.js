@@ -77,21 +77,20 @@ return(totalLetterPoints);
   let scoringMethod0={
     name:"Simple Score",
     description: "Each letter is worth 1 point",	
-    scorerFunction: simpleScore
+    scoringFunction: simpleScore
 
   };
   let scoringMethod1={
     name:"Bonus Vowels",
     description:"Vowels are 3 pts",
-    scoreFunction:vowelBonusScore 
+    scoringFunction:vowelBonusScore 
   };
   let scoringMethod2={ 
     name:"Scrabble",
     description:"Uses the scrabbleScore() function to determine the score for a given word",
-    scoreFunction: scrabbleScore }  
+    scoringFunction: scrabbleScore }  
 
-const scoringAlgorithms = [scoringMethod0,scoringMethod1,scoringMethod2];
-
+const scoringAlgorithms = [scoringMethod0,scoringMethod1,scoringMethod2]
 
   
 function scorerPrompt(){
