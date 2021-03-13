@@ -69,9 +69,21 @@ let  vowelBonusScore=(word)=> {
   return finalVowelBonusPoints;
 
 };
+let newPointStructure=transform(oldPointStructure);
 
 
-//word=input.question("Let's play some scrabble!\nEnter a word to score: ");
+
+let scrabbleScore=(word)=>{
+let totalLetterPoints = 0;
+for (i in word ){
+for (i = 0; i < word.length; i++) {
+    letter = word[i];
+    totalLetterPoints += newPointStructure[letter];
+}
+return(totalLetterPoints);
+}
+}
+word=input.question("Let's play some scrabble!\nEnter a word to score: ");
   
   let scoringMethod0={
     name:"Simple Score",
@@ -87,13 +99,11 @@ let  vowelBonusScore=(word)=> {
   let scoringMethod2={ 
     name:"Scrabble",
     description:"Uses the scrabbleScore() function to determine the score for a given word",
-    scoreFunction: oldScrabbleScorer()}  
+    scoreFunction: scrabbleScore() }  
 
 const scoringAlgorithms = [scoringMethod0,scoringMethod1,scoringMethod2];
 
 
-
-let scrabbleScore;
 
 
 
@@ -121,12 +131,17 @@ let algorithmChoice=input.question(`What scoring algorithm would you like to use
 }
 {
 console.log(transform(oldPointStructure)); 
-
 }
 
 //oldScrabbleScorer() uses oldPointStructure and returns a score for each letter in a word. You'll want to write scrabbleScore() to use newPointStructure and return a cumulative score for the whole word entered.
 
-let newPointStructure=transform(oldPointStructure);
+
+
+
+
+
+
+
 
 
 function runProgram() {
@@ -145,9 +160,6 @@ if (algorithmChoice == 1){
 if (algorithmChoice == 2){
             console.log (`You have chosen Scrabble\nYour score is:\n${scrabbleScore(word)} `)
 }
-{
-  console.log(word[2]);
-  }
 }
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
